@@ -40,7 +40,7 @@ exports.addEmployee=function(req,res){
         if(err){
              var message = "A user already exists with that username or email";
          console.log(message);
-         //res.render("register.handlebars", {errorMessage:message});
+         
          return;
         }else{
             console.log(savedUser);
@@ -57,12 +57,35 @@ exports.delEmployee = function(req,res){
     console.log('Inside delete routes');
     var id = req.params.id;
     console.log("id is ; "+id);
+    /*
     var newemp=new EmployeeModel;
-    newemp.remove({"id":id}, function(err){
+    newemp.find({}, function(err, userObj){
         if(err){
-            console.log("errored : "+err)
+
+        }else{
+            console.log("with find : "+userObj);
         }
     });
+    newemp.find({_id:id}, function(err, model){
+        if(err){
+            console.log("errored : "+err)
+        }else{
+            console.log("going to remove: "+model);
+            model.remove(function(err){
+
+            });
+        }
+    });
+        */
+        EmployeeModel.remove({_id:id}, function(err){
+             if(err){
+            console.log("errored : "+err)
+        }else{
+            
+
+            }
+        });
+    
    
     };
 
