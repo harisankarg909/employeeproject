@@ -13,8 +13,10 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:false}));
 
 app.get('/employee', routes.getEmployee);
+app.get('/employee/:id', routes.getEmployeeById);
 app.post('/employee', routes.addEmployee);
 app.delete('/employee/:id', routes.delEmployee);
+app.put('/employee/:id', routes.updateEmployee);
 
 
 var port = process.env.PORT || 3000;

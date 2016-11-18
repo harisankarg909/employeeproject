@@ -16,6 +16,15 @@ res.send(userObj);
     //res.render('login.handlebars', {});
 };
 
+exports.getEmployeeById=function(req,res){
+    console.log('Inside get by id routes');
+ var id = req.params.id;
+ mongoose.model('EmployeeModel').find({_id:id}, function(err, userObj){
+console.log("getbyid ; "+userObj);
+res.send(userObj);
+ });
+
+};
 
 exports.addEmployee=function(req,res){
     console.log('Inside post routes');
@@ -91,4 +100,20 @@ exports.delEmployee = function(req,res){
 
 
 
+    exports.updateEmployee = function(req,res){
+    console.log('Inside update routes');
+    var id = req.params.id;
+    console.log("id is ; "+id);
+   
+        EmployeeModel.find({_id:id}, function(err, userObj){
+             if(err){
+            console.log("errored : "+err)
+        }else{
+            
+
+            }
+        });
     
+   
+    };
+

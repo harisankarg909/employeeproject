@@ -11,7 +11,9 @@
 <body ng-app="emp">
     <br><br><br><br><br><br><br><br><br>
     <div class="container" ng-controller="AppCtrl">
-  
+  <h1 align="center">Employee Directory App</h1><br/><br/>
+  <p>Tag for testing{{employee}}</p><br>
+   <p>And name is : {{employee.name}}</p>
 <table class="table">          
         <thead>
           <tr>
@@ -27,22 +29,22 @@
             <tr>
                 <form>
                     <td>
-                       <input class='empform' ng-model="employee.name" placeholder="Name" value="test"/>
+                       <input class='empform' ng-model="employee.name" required placeholder="Name"/>
                     </td>
                     <td>
-                       <input type='email' class="empform" ng-model="employee.email" placeholder="email" value = "abc@abc.com"/>
+                       <input type='email' class="empform" ng-model="employee.email" required placeholder="email"/>
                     </td>
                     <td>
-                       <input type='text' class="empform" ng-model="employee.date" placeholder="DD-MM-YYYY" value = "11-11-11"/>
+                       <input type='text' class="empform" ng-model="employee.date" required placeholder="DD-MM-YYYY"/>
                     </td>
                     <td>
-                       <input ng-model="employee.dep" class="empform"placeholder="Department" value="test"/>
+                       <input ng-model="employee.dep" required class="empform"placeholder="Department"/>
                     </td>
                     <td>
-                       <input ng-model="employee.gender" class="empform" placeholder="Male/Female" value="Male"/>
+                       <input ng-model="employee.gender" required class="empform" placeholder="Male/Female"/>
                     </td>
                     <td>
-                       <input type='number' ng-model="employee.age" class="empform" placeholder="Age" value = "30" />
+                       <input type='number' ng-model="employee.age" required class="empform" placeholder="Age" />
                     </td>
                      <td>
                       <button class="btn btn-success btn-md" ng-click="addEmployee()">Add Employee</button>
@@ -55,7 +57,7 @@
             <tr ng-repeat="employee in employees">
                 <td>{{employee.name}}</td>
                 <td>{{employee.email}}</td>               
-                <td>{{employee.date | date:'yyyy-MM-dd'}}</td>
+                <td>{{employee.Date}}</td>
                 <td>{{employee.dep}}</td>
                 <td>{{employee.gender}}</td>
                 <td>{{employee.age}}</td>
@@ -98,7 +100,7 @@ emp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
      $scope.getEmployee = function() {
           
       $http.get('/employee').success(function (response) {
-               $scope.data = JSON.stringify(response);
+               $scope.data = response;
             })
             
     };
@@ -111,6 +113,13 @@ emp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
         list();
             
     };
+
+     $scope.editEmployee = function(id) {
+          
+      $http.get('/employee/'+id).success(function(response){
+               $scope.employee = response;
+            });
+     };
     
 }]);
 </script>
