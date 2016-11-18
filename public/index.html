@@ -57,7 +57,7 @@
             <tr ng-repeat="employee in employees">
                 <td>{{employee.name}}</td>
                 <td>{{employee.email}}</td>               
-                <td>{{employee.Date}}</td>
+                <td>{{employee.date}}</td>
                 <td>{{employee.dep}}</td>
                 <td>{{employee.gender}}</td>
                 <td>{{employee.age}}</td>
@@ -117,7 +117,14 @@ emp.controller('AppCtrl', ['$scope', '$http', function($scope, $http){
      $scope.editEmployee = function(id) {
           
       $http.get('/employee/'+id).success(function(response){
-               $scope.employee = response;
+               $scope.employee = response[0];
+            });
+     };
+
+          $scope.updateEmployee = function(id) {
+          
+      $http.put('/employee/'+$scope.employee._id, $scope.employee).success(function(response){
+               list();
             });
      };
     

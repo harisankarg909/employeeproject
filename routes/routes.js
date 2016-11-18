@@ -103,13 +103,35 @@ exports.delEmployee = function(req,res){
     exports.updateEmployee = function(req,res){
     console.log('Inside update routes');
     var id = req.params.id;
-    console.log("id is ; "+id);
+    var body = req.body;
+    console.log("id is ; "+id+" and body is : "+JSON.stringify(body));
    
         EmployeeModel.find({_id:id}, function(err, userObj){
              if(err){
             console.log("errored : "+err)
         }else{
-            
+            var updtemp=new EmployeeModel;
+            updtemp._id=id;
+            updtemp.name=body.name;
+            updtemp.email=body.email;
+            updtemp.date=body.date;
+            updtemp.dep=body.dep;
+            updtemp.gender=body.gender;
+            updtemp.age=body.age;
+
+            console.log("updated items : "+ updtemp.name);
+
+    EmployeeModel.update({_id:id}, {$set: {name:updtemp.name}}, {multi:false}, function(err, updtObj){
+
+        if(err){
+             var message = "Error occured"+err;
+         console.log(message);
+         
+         return;
+        }else{
+            console.log(updtObj);
+        }
+    });
 
             }
         });
