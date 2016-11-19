@@ -118,7 +118,7 @@ exports.delEmployee = function(req,res){
 
             console.log("updated items : "+ updtemp.name);
 
-    EmployeeModel.update({_id:id}, {$set: {name:updtemp.name}}, {multi:false}, function(err, updtObj){
+    EmployeeModel.update({_id:id}, {$set: {name:updtemp.name, email:updtemp.email, date:updtemp.date, dep:updtemp.dep, gender:updtemp.gender, age:updtemp.age}}, {multi:false}, function(err, updtObj){
 
         if(err){
              var message = "Error occured"+err;
@@ -126,12 +126,13 @@ exports.delEmployee = function(req,res){
          
          return;
         }else{
-            console.log("DB updated "+JSON.stringify(updtObj));
+            console.log("DB updated ");
         }
     });
 
             
-        };
+
+              };
     
    
     
