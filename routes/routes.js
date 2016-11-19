@@ -106,10 +106,7 @@ exports.delEmployee = function(req,res){
     var body = req.body;
     console.log("id is ; "+id+" and body is : "+JSON.stringify(body));
    
-        EmployeeModel.find({_id:id}, function(err, userObj){
-             if(err){
-            console.log("errored : "+err)
-        }else{
+      
             var updtemp=new EmployeeModel;
             updtemp._id=id;
             updtemp.name=body.name;
@@ -129,13 +126,13 @@ exports.delEmployee = function(req,res){
          
          return;
         }else{
-            console.log(updtObj);
+            console.log("DB updated "+JSON.stringify(updtObj));
         }
     });
 
-            }
-        });
+            
+        };
     
    
-    };
+    
 
